@@ -1,0 +1,17 @@
+.grid {
+  float: left;
+}
+
+.planet {
+  background-color: #231475;
+  width: 6px;
+  height: 6px;
+  border: solid 1px;	
+}
+
+.space {
+  background-color: black;
+  width: 6px;
+  height: 6px;
+}
+

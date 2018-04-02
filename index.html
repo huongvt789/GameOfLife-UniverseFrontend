@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Game of life</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="lifeColor.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <!-- example requires bootstrap-n-column.less to be compiled to styles.css -->
+  <link rel="stylesheet" href="style.css">        
 </head>
-<body>
-<h2>Oki nhe</h2>
+<body style="padding: 10px 57px;">
 </body>
-<script type="text/javascript" src="lifeUnivers.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+	function evolve()
+
+	function createRandomUniverseMap (x, y) {
+		var universeMapNumber = [];	
+		for(var j = 0; j <= x; j++){
+			universeMapNumber[j] = [];
+			for(var i = 0; i <= y; i++){
+		        universeMapNumber[j][i] = Math.round(Math.random());
+		    }
+		}
+			
+		return universeMapNumber;
+	}
+
+	function renderUniverse(universeMapNumber) {
+		var universeString = '';
+		for (var i = 0; i < 100; i++) {
+			universeString += `<div id="grid" style="background: white;">`;
+			for (var j = 0; j < 200; j++) {
+				if (universeMapNumber [i][j] === 1) {
+					universeString += `<div class="planet"></div>`;
+				} else {
+					universeString += `<div class="space"></div>`;
+				}
+			}
+			universeString += `</div>`;
+		}
+
+		$('body').append(universeString);
+	}
+
+	$(function(){
+		var universeMapNumber = createRandomUniverseMap(100, 200);
+
+		renderUniverse(universeMapNumber);
+	});
+
+
+</script>
 </html>
