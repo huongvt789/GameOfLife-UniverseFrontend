@@ -1,53 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <!-- example requires bootstrap-n-column.less to be compiled to styles.css -->
-  <link rel="stylesheet" href="style.css">        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lifeColor.css">
 </head>
 <body style="padding: 10px 57px;">
+
 </body>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="lifeUniverse.js"></script>
+<script>
+    $(function() {
+        UniverseModel.createRandomMap(100, 100);
 
-<script type="text/javascript">
-	function evolve()
+//        $('body').html(UniverseModel.toHtmlString(), null);
 
-	function createRandomUniverseMap (x, y) {
-		var universeMapNumber = [];	
-		for(var j = 0; j <= x; j++){
-			universeMapNumber[j] = [];
-			for(var i = 0; i <= y; i++){
-		        universeMapNumber[j][i] = Math.round(Math.random());
-		    }
-		}
-			
-		return universeMapNumber;
-	}
-
-	function renderUniverse(universeMapNumber) {
-		var universeString = '';
-		for (var i = 0; i < 100; i++) {
-			universeString += `<div id="grid" style="background: white;">`;
-			for (var j = 0; j < 200; j++) {
-				if (universeMapNumber [i][j] === 1) {
-					universeString += `<div class="planet"></div>`;
-				} else {
-					universeString += `<div class="space"></div>`;
-				}
-			}
-			universeString += `</div>`;
-		}
-
-		$('body').append(universeString);
-	}
-
-	$(function(){
-		var universeMapNumber = createRandomUniverseMap(100, 200);
-
-		renderUniverse(universeMapNumber);
-	});
-
-
+        window.setInterval(function(){
+            $('body').html(UniverseModel.nextTime(), null);
+        }, 500);
+    });
 </script>
 </html>
