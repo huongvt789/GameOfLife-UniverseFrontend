@@ -2,23 +2,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="lifeColor.css">
 </head>
 <body style="padding: 10px 57px;">
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="lifeUniverse.js"></script>
 <script>
-    $(function() {
-        UniverseModel.createRandomMap(100, 100);
-
-//        $('body').html(UniverseModel.toHtmlString(), null);
-
-        window.setInterval(function(){
-            $('body').html(UniverseModel.nextTime(), null);
-        }, 500);
+    $.(function() {
+        lifeUniverseModelGame.createUniverseMapRandom (200, 200);
     });
 </script>
 </html>
