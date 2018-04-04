@@ -31,7 +31,7 @@ let lifeUniverseModelGame = (function() {
                 let cellType = model.universeMapNumber[i][j] === 1 ? 'planet' : 'space';
                 model.universeToString += `<div class="` + cellType + `"></div>`;
             }
-            model.universeToString += `</div> `;
+            model.universeToString += `</div>`;
         }
 
         return model.universeToString;
@@ -39,8 +39,8 @@ let lifeUniverseModelGame = (function() {
 
 // B3: Xay dung qua trinh xu ly thoi gian lam moi
 
-	model.changeTimeAfter = function (time = 1) {
-		for (let i = 0; i <= time; i++){
+	model.evolve= function (time = 1) {
+		for (let i = 1; i <= time; i++){
 			model.lifeToNextTime ();
 		}
 	};
@@ -51,8 +51,7 @@ let lifeUniverseModelGame = (function() {
 		let nextUniverse = this;
         for (let i = 0; i < nextUniverse.x; i++) {
             for (let j = 0; j < nextUniverse.y; j++) {
-
-                nextUniverse.caculateCellState(i, j, model.countNeighborUniverse(i, j));
+                nextUniverse.calculateCellState(i, j, model.countNeighborPlanet(i, j));
             }
         }
 
@@ -62,31 +61,36 @@ let lifeUniverseModelGame = (function() {
 
 // B4: Tinh toan trang thai hien tai. 
 
-	model.caculateCellState = function (x, y, numberNeighbor) {
-		if (numberNeighbor <2 || numberNeighbor >3) {
-			model.universeMapNumber[x][y] = 0;
-		}
-		else if (3 === numberNeighbor ) {
-			model.universeMapNumber[x][y] = 1;
-		}
-	};
+	model.calculateCellState = function (x, y, numberOfNeighbor) {
+        if (numberOfNeighbor < 2 || numberOfNeighbor > 3) {
+            model.universeMapNumber[x][y] = 0;
+        } else if (3 === numberOfNeighbor) {
+            model.universeMapNumber[x][y] = 1;
+        }
+    };
+
+  model.countNeighborPlanet =function (i,j){
+  	return model.getValueOfCell()
+  }
 
 // B5: Tinh toan so luong hang xom lan can.
 
-	model.countNeighborUniverse = function (i, j){
-		return model.getValueOfCell(i - 1, j - 1) + model.getValueOfCell(i - 1, j) + model.getValueOfCell(i - 1, j + 1)
+	  model.countNeighborPlanet = function (i, j) {
+        return model.getValueOfCell(i - 1, j - 1) + model.getValueOfCell(i - 1, j) + model.getValueOfCell(i - 1, j + 1)
             + model.getValueOfCell(i, j - 1) + model.getValueOfCell(i, j + 1)
             + model.getValueOfCell(i + 1, j - 1) + model.getValueOfCell(i + 1, j) + model.getValueOfCell(i + 1, j + 1);
-	};
+    };
 
 // B6: Kiem tra loai tru truong hop dac biet doi voi gia tri o bien gioi
 
-	model.getValueOfCell = function (x, y){
-		if (x < 0 || x >= model.x || y < 0 || y < model.y){
-			return 0;
-		}
-		return model.universeMapNumber[x][y];
-	};
+	
+    model.getValueOfCell = function (x, y) {
+        if (x < 0 || x >= model.x || y < 0 || y >= model.y) {
+            return 0;
+        }
+
+        return model.universeMapNumber[x][y];
+    };
 	return model;
 
 })();
